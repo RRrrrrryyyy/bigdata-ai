@@ -38,6 +38,7 @@
   .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
   .src a{color:var(--accent);word-break:break-all;}
   .src .note{color:var(--muted);font-size:13px;}
+  details{margin-top:6px;} summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;}
   footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
 </style>
 </head>
@@ -51,14 +52,35 @@
 </header>
 
 <section>
-  <h2><span class="num">1</span>个人解释</h2>
+  <h2><span class="num">1</span>学习目标</h2>
+  <p>读完本资料，你应当能够：</p>
+  <ul>
+    <li><b>说出</b> Agent 与 Chatbot、Workflow 的本质区别——控制权归属；</li>
+    <li><b>描述</b> Agent "目标 → 规划 → 行动 → 观察" 的工作循环；</li>
+    <li><b>列举</b> 构成 Agent 的四要素（LLM、工具、记忆、控制循环）；</li>
+    <li><b>判断</b> 一个具体任务更适合交给 Agent 还是固定工作流。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">2</span>核心问题</h2>
+  <p>带着以下问题阅读，读完应在"自测问题"中检验自己能否回答：</p>
+  <ol>
+    <li>Agent 和"会调用工具的聊天机器人"到底差在哪里？</li>
+    <li>Agent 是如何"自己决定下一步做什么"的？这一步由谁、在什么时刻完成？</li>
+    <li>什么样的任务不应该交给 Agent，反而应该用更"笨"的固定流程？</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">3</span>个人解释</h2>
   <p>想象你雇了一位<b>特别能干的实习生</b>。普通 AI 聊天机器人像一部"问答机"：你问一句，它答一句，答完就停下等你。而 Agent 更像那位实习生——你只交代目标（"帮我订下周去上海的出差行程"），它会自己拆解任务：先查日历确定日期，再比价机票和酒店，看一眼天气预报决定要不要提醒你带伞，遇到价格异常还会换个平台重新查。</p>
   <p>两者的本质区别不在"聪明程度"，而在<b>控制权归属</b>：聊天机器人每说一句话都把方向盘交回给你；Agent 则在拿到目标后，由它自己决定下一步做什么、调用什么工具、什么时候停。官方媒体的通俗定义是：Agent 是"能够感知环境并利用工具采取行动以实现特定目标的代理"。</p>
   <div class="oneliner">如果只能记住一句话：Agent = 模型在循环中自己决定"下一步做什么"的自主任务执行系统——人给目标，模型定路径。</div>
 </section>
 
 <section>
-  <h2><span class="num">2</span>核心机制</h2>
+  <h2><span class="num">4</span>核心机制</h2>
   <h3>起源</h3>
   <p>Agent 是人工智能领域的经典概念，其现代形态由大语言模型（LLM）点燃：OpenAI 将其描述为"以大语言模型为大脑，整合感知、规划、记忆与工具调用能力的自主系统"。2024 年 12 月，Anthropic 发布工程指南《Building Effective Agents》，给出了业界广泛引用的区分标准，使这一概念在产业界快速普及。</p>
   <h3>原理：目标 → 观察 → 行动 的循环</h3>
@@ -78,7 +100,7 @@
 </section>
 
 <section>
-  <h2><span class="num">3</span>应用场景</h2>
+  <h2><span class="num">5</span>应用场景</h2>
   <div class="case"><b>智能客服（企业服务）</b>：客服 Agent 自动追问客户、检索内部文档、给出方案，并自行判断是当场解决还是转接人工——这是 AWS 文档给出的典型案例。</div>
   <div class="case"><b>金融风控（金融业）</b>：金融智能体实时监控交易流以检测欺诈活动与网络威胁，减少误报并提高交易安全性（据央广网报道的产业应用）。</div>
   <div class="case"><b>科研模拟（学术界）</b>：斯坦福"虚拟小镇"实验中，25-50 个智能体在数字社会中自主协作，模拟社区治理、资源分配等复杂任务。</div>
@@ -87,7 +109,7 @@
 </section>
 
 <section>
-  <h2><span class="num">4</span>边界辨析</h2>
+  <h2><span class="num">6</span>边界辨析</h2>
   <table>
     <tr><th>维度</th><th>Chatbot（聊天机器人）</th><th>Workflow（工作流）</th><th>Agent（智能体）</th></tr>
     <tr><td><b>定义</b></td><td>输入文本、输出文本的对话接口，不主动做事</td><td>开发者预先编排的固定步骤链路，LLM 只在节点内"填空"</td><td>LLM 动态决定自己的流程与工具使用方式的自主系统</td></tr>
@@ -100,7 +122,21 @@
 </section>
 
 <section>
-  <h2><span class="num">5</span>来源链接</h2>
+  <h2><span class="num">7</span>自测问题</h2>
+  <div class="case"><b>1.（判断）</b>模型能力越强，就越应该用 Agent 而不是 Workflow 来完成任务。
+    <details><summary>参考答案</summary><b>错误。</b>选型依据是任务路径是否确定，而非模型强弱——路径可预先编排的任务，用 Workflow 更快、更省、更易调试（Anthropic《Building Effective Agents》的建议）。</details></div>
+  <div class="case"><b>2.（选择）</b>"人给目标，模型定路径"描述的是：A. Chatbot　B. Workflow　C. Agent
+    <details><summary>参考答案</summary><b>C。</b>控制权在运行时由模型动态掌握是 Agent 的定义性特征。</details></div>
+  <div class="case"><b>3.（填空）</b>业界常把 Agent 概括为公式：Agent = LLM ×（____ + ____ + ____ + ____）。
+    <details><summary>参考答案</summary>规划（Planning）+ 记忆（Memory）+ 工具（Tools）+ 行动（Action）。</details></div>
+  <div class="case"><b>4.（简答）</b>你需要 AI 每天定时抓取三个固定数据源、按固定格式生成日报，该用 Agent 还是 Workflow？为什么？
+    <details><summary>参考答案</summary><b>Workflow。</b>步骤与路径完全固定、可提前编排，用固定流程更快、更便宜、更好调试；Agent 的自主性在这里只会增加成本与不确定性。</details></div>
+  <div class="case"><b>5.（简答）</b>Agent 的"短期记忆"存放在哪里？
+    <details><summary>参考答案</summary>存放在<b>当前任务的上下文窗口</b>中；跨任务的长期记忆需要外部存储（如数据库，常配合 RAG 检索）实现。</details></div>
+</section>
+
+<section>
+  <h2><span class="num">8</span>来源链接</h2>
   <div class="src"><span class="n">1</span><div><a href="https://news.cnr.cn/native/gd/kx/20251014/t20251014_527394962.shtml">网警：关于智能体，这些你需要了解（央广网）</a><div class="note">贡献了 Agent 的官方媒体定义、四组件架构（感知/记忆/动作/LLM）与产业应用案例。</div></div></div>
   <div class="src"><span class="n">2</span><div><a href="https://alicelabs.ai/en/insights/what-is-an-ai-agent">What is an AI Agent（Alice Labs）</a><div class="note">贡献了 Agent 四要素（LLM/工具/记忆/控制循环）、常见类型，以及转述的 Anthropic《Building Effective Agents》(2024-12) 中 Workflow 与 Agent 的区分标准。</div></div></div>
   <div class="src"><span class="n">3</span><div><a href="https://sqmagazine.co.uk/glossary/ai-agent">What an AI Agent Actually Is（SQ Magazine）</a><div class="note">贡献了 OpenAI《A Practical Guide to Building Agents》与微软 Foundry 文档中的定义："不用 LLM 控制工作流执行的应用不是 Agent"。</div></div></div>

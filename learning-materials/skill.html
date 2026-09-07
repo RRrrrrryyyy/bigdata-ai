@@ -39,6 +39,7 @@
   .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
   .src a{color:var(--accent);word-break:break-all;}
   .src .note{color:var(--muted);font-size:13px;}
+  details{margin-top:6px;} summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;}
   footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
 </style>
 </head>
@@ -52,14 +53,35 @@
 </header>
 
 <section>
-  <h2><span class="num">1</span>个人解释</h2>
+  <h2><span class="num">1</span>学习目标</h2>
+  <p>读完本资料，你应当能够：</p>
+  <ul>
+    <li><b>说出</b> Skill 解决的核心问题——通用 Agent 缺领域专长；</li>
+    <li><b>描述</b> 三级渐进式披露机制，以及它为什么能省上下文；</li>
+    <li><b>区分</b> Skill、Tool/MCP、Prompt、微调四种能力扩展方式；</li>
+    <li><b>判断</b> 什么时候应该把反复粘贴的提示词沉淀为 Skill。</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="num">2</span>核心问题</h2>
+  <p>带着以下问题阅读，读完应在"自测问题"中检验自己能否回答：</p>
+  <ol>
+    <li>把规范直接写进系统提示词，和做成 Skill，差别在哪里？</li>
+    <li>装了几百个 Skill，为什么不会撑爆模型的上下文窗口？</li>
+    <li>Skill 和 MCP 工具是什么关系——它们是竞争还是互补？</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="num">3</span>个人解释</h2>
   <p>想象一位新入职的天才员工：智商极高、学习能力极强，但对你们公司的规矩一无所知——不知道周报用什么格式、PPT 要套什么模板、报销走什么流程。传统解法是每次干活前<b>口头叮嘱一遍</b>（这就像每次对话都粘贴一大段 prompt）；而 Skill 的做法是给这位天才发一本<b>《新员工入职手册》</b>：把"这类事在我们这儿怎么做"写成一册册文档，放在书架上。</p>
   <p>关键在于<strong>手册不是一直摊在桌上的</strong>：每本手册的封面（技能名称和简介）始终可见，但正文只在任务匹配时才被翻开。这位天才看到"帮我做季度汇报 PPT"，才去抽出《品牌 PPT 规范》这本手册照着做；做代码审查时才翻《代码评审清单》。一本手册写一次、全团队复用，既沉淀了组织经验，又不占用桌面空间（也就是不浪费模型的上下文窗口）。</p>
   <div class="oneliner">如果只能记住一句话：Skill 是打包了"某个领域该怎么做"的文件夹（以 SKILL.md 为核心），让通用 AI 助手在需要时自动加载，从通才变成专才——工具决定 AI"能做什么"，Skill 决定"怎么做"。</div>
 </section>
 
 <section>
-  <h2><span class="num">2</span>核心机制</h2>
+  <h2><span class="num">4</span>核心机制</h2>
   <h3>起源</h3>
   <p>2025 年 10 月，Anthropic 发布 Agent Skills；同年 12 月 18 日将其发布为<b>跨平台可移植的开放标准</b>。它回答的是 Agent 落地的核心缺口：通用 Agent 有智能、有工具，但<b>没有领域专长</b>——就像会解所有数学题的天才，未必比做过上千份报税单的老会计报得好税。Anthropic 的博客直言：他们因此"停止构建一个个专用 Agent，转而构建 Skill"。</p>
   <h3>原理：一个文件夹 + 三级渐进式披露</h3>
@@ -78,7 +100,7 @@
 </section>
 
 <section>
-  <h2><span class="num">3</span>应用场景</h2>
+  <h2><span class="num">5</span>应用场景</h2>
   <div class="case"><b>办公文档生成（日常办公）</b>：Anthropic 预置了 PowerPoint、Excel、Word、PDF 等文档技能，内含专业排版与最佳实践，用户说"做个含公式的报表"即自动触发对应 Skill。</div>
   <div class="case"><b>组织流程标准化（企业协作）</b>：把公司的周报格式、品牌规范、发布流程写成 Skill，上传一次、全员复用——Claude Academy 的示例中，所有 PM 产出的状态报告自动遵循同一结构与语气，无需任何人复制粘贴模板。</div>
   <div class="case"><b>沉淀重复性工作流（个人效率）</b>：Claude Code 官方建议——"当你反复把同一段指令/清单/多步流程粘贴进对话时，就该做成 Skill 了"。例如 git 变更总结、代码评审清单、项目启动配方（recipe）的自动记录与复用。</div>
@@ -87,7 +109,7 @@
 </section>
 
 <section>
-  <h2><span class="num">4</span>边界辨析</h2>
+  <h2><span class="num">6</span>边界辨析</h2>
   <table>
     <tr><th>维度</th><th>Skill（技能）</th><th>Tool / MCP（工具）</th><th>Prompt / System Prompt（提示词）</th></tr>
     <tr><td><b>定义</b></td><td>打包"某类任务该怎么做"的指令文件夹，按需自动加载</td><td>连接数据与动作的接口（查代码、发邮件），由外部程序执行</td><td>写在对话里的即时指令，随对话结束而消失</td></tr>
@@ -100,7 +122,21 @@
 </section>
 
 <section>
-  <h2><span class="num">5</span>来源链接</h2>
+  <h2><span class="num">7</span>自测问题</h2>
+  <div class="case"><b>1.（判断）</b>Skill 是一种轻量级的模型微调。
+    <details><summary>参考答案</summary><b>错误。</b>Skill 不改变模型权重，只是按需加载的指令文件；微调把知识"焊进"权重，成本高、更新慢。</details></div>
+  <div class="case"><b>2.（填空）</b>SKILL.md 的元数据中，决定"何时触发本技能"的字段是 ____。
+    <details><summary>参考答案</summary><b>description</b>。模型把用户请求与各技能的 description 匹配来决定加载哪个 Skill，因此它必须同时写清"做什么"和"何时用"。</details></div>
+  <div class="case"><b>3.（简答）</b>三级渐进式披露中，哪一级常驻上下文？大约占用多少 token？
+    <details><summary>参考答案</summary><b>第 1 级（元数据）</b>，仅 name 与 description 进入系统提示，约 50-100 token——所以装几百个 Skill 也不会挤占窗口。</details></div>
+  <div class="case"><b>4.（选择）</b>你发现自己每次对话都要粘贴同一段"周报格式要求"。按照官方建议，正确的做法是：A. 换更大的模型　B. 把它做成 Skill　C. 每次手动粘贴　D. 微调模型
+    <details><summary>参考答案</summary><b>B。</b>Claude Code 官方文档："当你反复把同一段指令/清单/多步流程粘贴进对话时，就该做成 Skill 了。"</details></div>
+  <div class="case"><b>5.（辨析）</b>Skill 回答"怎么做"（How），那么 Tool/MCP 回答的是____？
+    <details><summary>参考答案</summary><b>"能做什么"（What）</b>——Tool 提供能力与数据通道，Skill 提供使用这些能力的流程、规范与最佳实践，两者互补。</details></div>
+</section>
+
+<section>
+  <h2><span class="num">8</span>来源链接</h2>
   <div class="src"><span class="n">1</span><div><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills 官方文档（Anthropic / Claude Platform）</a><div class="note">一手来源。贡献了 Skill 的官方定义、三级渐进式披露架构、YAML frontmatter 规范与 scripts/references 资源组织方式。</div></div></div>
   <div class="src"><span class="n">2</span><div><a href="https://www.anthropic.com/news/skills">Introducing Agent Skills（Anthropic 官方公告）</a><div class="note">一手来源。贡献了发布时间线（2025-10 推出、2025-12-18 成为开放标准）、可组合/可移植/高效三大特性。</div></div></div>
   <div class="src"><span class="n">3</span><div><a href="http://claude.com/blog/building-agents-with-skills-equipping-agents-for-specialized-work">Building agents with Skills（Anthropic 工程博客）</a><div class="note">贡献了"从构建专用 Agent 转向构建 Skill"的范式转变叙事、天才与老会计类比、三级 token 成本数据与技能生态三分法。</div></div></div>
