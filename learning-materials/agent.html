@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent 学习资料</title>
+<style>
+  :root{
+    --accent:#2563eb; --accent-bg:#eff6ff; --border:#e2e8f0; --text:#1e293b;
+    --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --ok:#059669; --warn:#b45309;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  header{background:linear-gradient(135deg,#2563eb,#1e40af);color:#fff;border-radius:14px;padding:36px 32px;margin-bottom:24px;}
+  header .tag{display:inline-block;background:rgba(255,255,255,.18);padding:2px 12px;border-radius:999px;font-size:13px;margin-bottom:12px;}
+  header h1{font-size:30px;margin-bottom:8px;}
+  header .sub{font-size:14px;opacity:.85;}
+  section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:20px;}
+  section h2{font-size:20px;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent-bg);display:flex;align-items:center;gap:10px;}
+  section h2 .num{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--text);}
+  p{margin-bottom:10px;}
+  ul,ol{padding-left:22px;margin-bottom:10px;}
+  li{margin-bottom:6px;}
+  .oneliner{background:var(--accent-bg);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-weight:600;}
+  .term{background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:8px;}
+  .term b{color:var(--accent);}
+  .case{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .case b{color:var(--accent);}
+  .case.na{border-color:#fcd34d;background:#fffbeb;}
+  .case.na b{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top;}
+  th{background:var(--accent-bg);color:var(--text);}
+  tr:nth-child(even) td{background:#fafbfd;}
+  .src{display:flex;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;}
+  .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
+  .src a{color:var(--accent);word-break:break-all;}
+  .src .note{color:var(--muted);font-size:13px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="tag">人工智能 / 自主系统</span>
+  <h1>Agent（智能体）学习资料</h1>
+  <div class="sub">生成日期：2026-09-07 ｜ 生成方式：基于 5 条独立检索来源综合编写</div>
+</header>
+
+<section>
+  <h2><span class="num">1</span>个人解释</h2>
+  <p>想象你雇了一位<b>特别能干的实习生</b>。普通 AI 聊天机器人像一部"问答机"：你问一句，它答一句，答完就停下等你。而 Agent 更像那位实习生——你只交代目标（"帮我订下周去上海的出差行程"），它会自己拆解任务：先查日历确定日期，再比价机票和酒店，看一眼天气预报决定要不要提醒你带伞，遇到价格异常还会换个平台重新查。</p>
+  <p>两者的本质区别不在"聪明程度"，而在<b>控制权归属</b>：聊天机器人每说一句话都把方向盘交回给你；Agent 则在拿到目标后，由它自己决定下一步做什么、调用什么工具、什么时候停。官方媒体的通俗定义是：Agent 是"能够感知环境并利用工具采取行动以实现特定目标的代理"。</p>
+  <div class="oneliner">如果只能记住一句话：Agent = 模型在循环中自己决定"下一步做什么"的自主任务执行系统——人给目标，模型定路径。</div>
+</section>
+
+<section>
+  <h2><span class="num">2</span>核心机制</h2>
+  <h3>起源</h3>
+  <p>Agent 是人工智能领域的经典概念，其现代形态由大语言模型（LLM）点燃：OpenAI 将其描述为"以大语言模型为大脑，整合感知、规划、记忆与工具调用能力的自主系统"。2024 年 12 月，Anthropic 发布工程指南《Building Effective Agents》，给出了业界广泛引用的区分标准，使这一概念在产业界快速普及。</p>
+  <h3>原理：目标 → 观察 → 行动 的循环</h3>
+  <ol>
+    <li><b>接收目标</b>：用户用自然语言下达任务，而非逐步指令；</li>
+    <li><b>规划（Planning）</b>：LLM 把复杂目标拆解为可执行的子任务序列；</li>
+    <li><b>行动（Action）</b>：通过调用工具（搜索、API、代码执行、文件读写）影响真实世界；</li>
+    <li><b>观察与反思（Observe / Reflect）</b>：读取工具返回结果，判断任务是否完成、路径是否需要调整，然后回到第 2 步，直到达成目标或请求人类介入。</li>
+  </ol>
+  <p>业界常把这个架构概括为公式：<b>AI Agent = LLM（大脑）×（规划 + 记忆 + 工具 + 行动）</b>。记忆分短期（当前任务的上下文窗口）与长期（外部数据库，常配合 RAG 检索）。</p>
+  <h3>关键术语</h3>
+  <div class="term"><b>LLM（大脑）</b>：负责理解、推理与决策的推理引擎，是 Agent 的核心处理组件。</div>
+  <div class="term"><b>工具调用（Function Calling）</b>：把模型的"想法"转化为实际函数调用，是 Agent 从"说"走向"做"的桥梁。</div>
+  <div class="term"><b>控制循环（Control Loop）</b>：感知 → 推理 → 行动 → 观察 的循环编排器，决定何时行动、何时停止。</div>
+  <div class="term"><b>ReAct</b>：推理（Reason）与行动（Act）交替进行的经典 Agent 模式（Yao 等，2022）。</div>
+  <div class="term"><b>MCP（Model Context Protocol）</b>：标准化模型与外部工具连接的协议，相当于 Agent 的"工具插座"。</div>
+</section>
+
+<section>
+  <h2><span class="num">3</span>应用场景</h2>
+  <div class="case"><b>智能客服（企业服务）</b>：客服 Agent 自动追问客户、检索内部文档、给出方案，并自行判断是当场解决还是转接人工——这是 AWS 文档给出的典型案例。</div>
+  <div class="case"><b>金融风控（金融业）</b>：金融智能体实时监控交易流以检测欺诈活动与网络威胁，减少误报并提高交易安全性（据央广网报道的产业应用）。</div>
+  <div class="case"><b>科研模拟（学术界）</b>：斯坦福"虚拟小镇"实验中，25-50 个智能体在数字社会中自主协作，模拟社区治理、资源分配等复杂任务。</div>
+  <div class="case"><b>开放性调研与排查（研发）</b>：如"调研竞品上周动态并整理成对比表"这类路径不确定、需边做边判断的任务，正是 Agent 的主场。</div>
+  <div class="case na"><b>不适用场景：步骤固定、规则清晰的任务</b>。Anthropic 明确建议：路径可预先画在白板上的任务应使用 Workflow（固定流程编排），它更快、更便宜、更好调试。给这类任务硬上 Agent，只会得到更贵、更难排查的黑箱。</div>
+</section>
+
+<section>
+  <h2><span class="num">4</span>边界辨析</h2>
+  <table>
+    <tr><th>维度</th><th>Chatbot（聊天机器人）</th><th>Workflow（工作流）</th><th>Agent（智能体）</th></tr>
+    <tr><td><b>定义</b></td><td>输入文本、输出文本的对话接口，不主动做事</td><td>开发者预先编排的固定步骤链路，LLM 只在节点内"填空"</td><td>LLM 动态决定自己的流程与工具使用方式的自主系统</td></tr>
+    <tr><td><b>谁决定下一步</b></td><td>用户（你问它才答）</td><td>人提前写死的代码路径</td><td>模型在运行时当场决定</td></tr>
+    <tr><td><b>工具使用</b></td><td>无</td><td>可调用，但顺序固定</td><td>可调用，且选择与顺序动态生成</td></tr>
+    <tr><td><b>典型形态</b></td><td>纯对话问答</td><td>Dify、n8n 等平台拖出的流程图</td><td>AutoGPT、Claude Code 等自主任务执行器</td></tr>
+    <tr><td><b>一句话区分</b></td><td>你说话它才动</td><td>人定骨架，模型填肉</td><td>人给目标，模型定路径</td></tr>
+  </table>
+  <p style="color:var(--muted);font-size:14px;">判断口诀：人提前写死路径的是 Workflow；模型当场决定路径的才是 Agent。RAG（检索增强生成）则介于 Chatbot 与 Workflow 之间——它让系统"更博学"，但检索链路仍是人写死的，并未更自主。</p>
+</section>
+
+<section>
+  <h2><span class="num">5</span>来源链接</h2>
+  <div class="src"><span class="n">1</span><div><a href="https://news.cnr.cn/native/gd/kx/20251014/t20251014_527394962.shtml">网警：关于智能体，这些你需要了解（央广网）</a><div class="note">贡献了 Agent 的官方媒体定义、四组件架构（感知/记忆/动作/LLM）与产业应用案例。</div></div></div>
+  <div class="src"><span class="n">2</span><div><a href="https://alicelabs.ai/en/insights/what-is-an-ai-agent">What is an AI Agent（Alice Labs）</a><div class="note">贡献了 Agent 四要素（LLM/工具/记忆/控制循环）、常见类型，以及转述的 Anthropic《Building Effective Agents》(2024-12) 中 Workflow 与 Agent 的区分标准。</div></div></div>
+  <div class="src"><span class="n">3</span><div><a href="https://sqmagazine.co.uk/glossary/ai-agent">What an AI Agent Actually Is（SQ Magazine）</a><div class="note">贡献了 OpenAI《A Practical Guide to Building Agents》与微软 Foundry 文档中的定义："不用 LLM 控制工作流执行的应用不是 Agent"。</div></div></div>
+  <div class="src"><span class="n">4</span><div><a href="http://ai-tldr.dev/learn/ai-agents/agent-fundamentals/agents-vs-workflows-vs-chatbots">Agents vs Workflows vs Chatbots（AI TL;DR）</a><div class="note">贡献了"自主性是旋钮不是开关"的选型原则与人机协同检查点实践。</div></div></div>
+  <div class="src"><span class="n">5</span><div><a href="https://d-central.tech/ai-agents-vs-chatbots-vs-workflows/">AI Agents vs Chatbots vs Workflows for Business（D-Central）</a><div class="note">贡献了"选择能可靠完成任务的最小自主性"原则与 MCP 协议的角色说明。</div></div></div>
+</section>
+
+<footer>本资料由 concept-learning-material 技能生成 ｜ 事实性内容均可追溯至上述来源</footer>
+</div>
+</body>
+</html>

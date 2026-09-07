@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill 学习资料</title>
+<style>
+  :root{
+    --accent:#9333ea; --accent-bg:#faf5ff; --border:#e2e8f0; --text:#1e293b;
+    --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --ok:#059669; --warn:#b45309;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  header{background:linear-gradient(135deg,#9333ea,#6b21a8);color:#fff;border-radius:14px;padding:36px 32px;margin-bottom:24px;}
+  header .tag{display:inline-block;background:rgba(255,255,255,.18);padding:2px 12px;border-radius:999px;font-size:13px;margin-bottom:12px;}
+  header h1{font-size:30px;margin-bottom:8px;}
+  header .sub{font-size:14px;opacity:.85;}
+  section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:20px;}
+  section h2{font-size:20px;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent-bg);display:flex;align-items:center;gap:10px;}
+  section h2 .num{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;}
+  h3{font-size:16px;margin:16px 0 8px;color:var(--text);}
+  p{margin-bottom:10px;}
+  ul,ol{padding-left:22px;margin-bottom:10px;}
+  li{margin-bottom:6px;}
+  code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:13px;}
+  .oneliner{background:var(--accent-bg);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-weight:600;}
+  .term{background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:8px;}
+  .term b{color:var(--accent);}
+  .case{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
+  .case b{color:var(--accent);}
+  .case.na{border-color:#fcd34d;background:#fffbeb;}
+  .case.na b{color:var(--warn);}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;}
+  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top;}
+  th{background:var(--accent-bg);color:var(--text);}
+  tr:nth-child(even) td{background:#fafbfd;}
+  .src{display:flex;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;}
+  .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
+  .src a{color:var(--accent);word-break:break-all;}
+  .src .note{color:var(--muted);font-size:13px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="tag">人工智能 / 智能体扩展机制</span>
+  <h1>Skill（智能体技能）学习资料</h1>
+  <div class="sub">生成日期：2026-09-07 ｜ 生成方式：基于 5 条独立检索来源综合编写</div>
+</header>
+
+<section>
+  <h2><span class="num">1</span>个人解释</h2>
+  <p>想象一位新入职的天才员工：智商极高、学习能力极强，但对你们公司的规矩一无所知——不知道周报用什么格式、PPT 要套什么模板、报销走什么流程。传统解法是每次干活前<b>口头叮嘱一遍</b>（这就像每次对话都粘贴一大段 prompt）；而 Skill 的做法是给这位天才发一本<b>《新员工入职手册》</b>：把"这类事在我们这儿怎么做"写成一册册文档，放在书架上。</p>
+  <p>关键在于<strong>手册不是一直摊在桌上的</strong>：每本手册的封面（技能名称和简介）始终可见，但正文只在任务匹配时才被翻开。这位天才看到"帮我做季度汇报 PPT"，才去抽出《品牌 PPT 规范》这本手册照着做；做代码审查时才翻《代码评审清单》。一本手册写一次、全团队复用，既沉淀了组织经验，又不占用桌面空间（也就是不浪费模型的上下文窗口）。</p>
+  <div class="oneliner">如果只能记住一句话：Skill 是打包了"某个领域该怎么做"的文件夹（以 SKILL.md 为核心），让通用 AI 助手在需要时自动加载，从通才变成专才——工具决定 AI"能做什么"，Skill 决定"怎么做"。</div>
+</section>
+
+<section>
+  <h2><span class="num">2</span>核心机制</h2>
+  <h3>起源</h3>
+  <p>2025 年 10 月，Anthropic 发布 Agent Skills；同年 12 月 18 日将其发布为<b>跨平台可移植的开放标准</b>。它回答的是 Agent 落地的核心缺口：通用 Agent 有智能、有工具，但<b>没有领域专长</b>——就像会解所有数学题的天才，未必比做过上千份报税单的老会计报得好税。Anthropic 的博客直言：他们因此"停止构建一个个专用 Agent，转而构建 Skill"。</p>
+  <h3>原理：一个文件夹 + 三级渐进式披露</h3>
+  <p>每个 Skill 是一个文件夹，核心是 <code>SKILL.md</code> 文件：YAML 元数据（name + description）声明"我是谁、何时用我"，正文是操作指南，可另附脚本（scripts/）、参考文档（references/）、模板资产（assets/）。它按需分三级加载：</p>
+  <ol>
+    <li><b>第 1 级 · 元数据（常驻）</b>：仅 name 与 description 进入系统提示，约 50-100 token。因此装几百个 Skill 也不撑爆上下文。</li>
+    <li><b>第 2 级 · 指令（触发时加载）</b>：用户请求与 description 匹配时，模型才读取 SKILL.md 正文（应控制在 5k token 内）。</li>
+    <li><b>第 3 级 · 资源（按需加载）</b>：脚本通过执行而非读入来使用（只有运行结果进入上下文），参考文档只在被引用时读取。</li>
+  </ol>
+  <h3>关键术语</h3>
+  <div class="term"><b>SKILL.md</b>：每个 Skill 的必备核心文件，YAML 前言 + Markdown 指令正文。</div>
+  <div class="term"><b>Frontmatter（元数据前言）</b>：description 是触发匹配的依据，必须同时写清"做什么"和"何时用"。</div>
+  <div class="term"><b>渐进式披露（Progressive Disclosure）</b>：元数据常驻、正文按需、资源更需的三级加载机制，是 Skill 不浪费上下文的关键设计。</div>
+  <div class="term"><b>触发（Trigger）</b>：模型将用户请求与各 Skill 的 description 匹配、自动决定加载哪个 Skill 的过程；也可用 <code>/skill-name</code> 手动调用。</div>
+  <div class="term"><b>skill-creator</b>：官方提供的"用 Skill 造 Skill"的元技能，引导用户交互式生成完整的 Skill 目录。</div>
+</section>
+
+<section>
+  <h2><span class="num">3</span>应用场景</h2>
+  <div class="case"><b>办公文档生成（日常办公）</b>：Anthropic 预置了 PowerPoint、Excel、Word、PDF 等文档技能，内含专业排版与最佳实践，用户说"做个含公式的报表"即自动触发对应 Skill。</div>
+  <div class="case"><b>组织流程标准化（企业协作）</b>：把公司的周报格式、品牌规范、发布流程写成 Skill，上传一次、全员复用——Claude Academy 的示例中，所有 PM 产出的状态报告自动遵循同一结构与语气，无需任何人复制粘贴模板。</div>
+  <div class="case"><b>沉淀重复性工作流（个人效率）</b>：Claude Code 官方建议——"当你反复把同一段指令/清单/多步流程粘贴进对话时，就该做成 Skill 了"。例如 git 变更总结、代码评审清单、项目启动配方（recipe）的自动记录与复用。</div>
+  <div class="case"><b>合作伙伴生态（SaaS 集成）</b>：Notion、Browserbase 等公司以 Partner Skill 的形式把自己的服务能力打包给 Agent 使用，形成"基础技能 + 伙伴技能 + 自建技能"的生态。</div>
+  <div class="case na"><b>不适用场景：一次性简单指令与外部数据连接</b>。只需一句话说清的事，直接写 prompt 即可，做成 Skill 反而增加维护负担；需要让 AI"连接和操作外部系统"（查数据库、发邮件）时，那是工具/MCP 的职责，Skill 解决的是"怎么做"而非"能做什么"。</div>
+</section>
+
+<section>
+  <h2><span class="num">4</span>边界辨析</h2>
+  <table>
+    <tr><th>维度</th><th>Skill（技能）</th><th>Tool / MCP（工具）</th><th>Prompt / System Prompt（提示词）</th></tr>
+    <tr><td><b>定义</b></td><td>打包"某类任务该怎么做"的指令文件夹，按需自动加载</td><td>连接数据与动作的接口（查代码、发邮件），由外部程序执行</td><td>写在对话里的即时指令，随对话结束而消失</td></tr>
+    <tr><td><b>回答的问题</b></td><td>"怎么做"（How）——流程、规范、最佳实践</td><td>"能做什么"（What）——能力与数据通道</td><td>"这次做什么"——单次任务的要求</td></tr>
+    <tr><td><b>复用性</b></td><td>创建一次，跨对话/跨产品自动复用</td><td>一次集成，随处调用</td><td>每次对话都要重新粘贴</td></tr>
+    <tr><td><b>加载方式</b></td><td>三级渐进式披露，触发才加载正文</td><td>定义进工具列表，随调用执行</td><td>始终占据当前上下文</td></tr>
+    <tr><td><b>一句话区分</b></td><td>Skill 是入职手册，教方法</td><td>Tool 是工具箱，给能力</td><td>Prompt 是口头交代，说完即止</td></tr>
+  </table>
+  <p style="color:var(--muted);font-size:14px;">另可对比微调（Fine-tuning）：微调把知识"焊进"模型权重，成本高、更新慢；Skill 把知识放在文件系统里，用 Git 版本管理、随时可改，还能捆绑可执行脚本完成"生成 token 不可靠"的确定性操作——"代码即接口"正是 Skill 范式的核心理念。</p>
+</section>
+
+<section>
+  <h2><span class="num">5</span>来源链接</h2>
+  <div class="src"><span class="n">1</span><div><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills 官方文档（Anthropic / Claude Platform）</a><div class="note">一手来源。贡献了 Skill 的官方定义、三级渐进式披露架构、YAML frontmatter 规范与 scripts/references 资源组织方式。</div></div></div>
+  <div class="src"><span class="n">2</span><div><a href="https://www.anthropic.com/news/skills">Introducing Agent Skills（Anthropic 官方公告）</a><div class="note">一手来源。贡献了发布时间线（2025-10 推出、2025-12-18 成为开放标准）、可组合/可移植/高效三大特性。</div></div></div>
+  <div class="src"><span class="n">3</span><div><a href="http://claude.com/blog/building-agents-with-skills-equipping-agents-for-specialized-work">Building agents with Skills（Anthropic 工程博客）</a><div class="note">贡献了"从构建专用 Agent 转向构建 Skill"的范式转变叙事、天才与老会计类比、三级 token 成本数据与技能生态三分法。</div></div></div>
+  <div class="src"><span class="n">4</span><div><a href="https://academy.claude.com/courses/claude-platform-101/skills">Skills 课程（Claude Academy）</a><div class="note">贡献了 Skill vs Tool 的经典区分（tools = what，skills = how）与"周报生成器"端到端示例。</div></div></div>
+  <div class="src"><span class="n">5</span><div><a href="https://code.claude.com/docs/en/skills">Extend Claude with skills（Claude Code 官方文档）</a><div class="note">贡献了"何时该创建 Skill"的判断标准（反复粘贴同样指令时）、与 CLAUDE.md 的区别及 /skill 调用机制。</div></div></div>
+</section>
+
+<footer>本资料由 concept-learning-material 技能生成 ｜ 事实性内容均可追溯至上述来源</footer>
+</div>
+</body>
+</html>

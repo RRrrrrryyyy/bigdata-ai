@@ -1,0 +1,86 @@
+# bigdata-ai
+
+AI 核心概念学习资料仓库：围绕 **Agent（智能体）**、**大模型的上下文（Context）**、**Skill（智能体技能）** 三个概念，沉淀结构化学习资料与概念关系解析。
+
+## 仓库用途
+
+1. **概念学习**：为任意新概念生成结构化的五段式学习资料（个人解释 / 核心机制 / 应用场景 / 边界辨析 / 来源链接）；
+2. **概念关联**：说明 Agent、上下文、Skill 三者之间的协作关系（见 `concept-relationship.md`）；
+3. **技能沉淀**：存放驱动上述资料生成的 Skill 定义，使其可复用、可迭代。
+
+## 目录结构
+
+```
+bigdata-ai/
+├── learning-materials/          # 概念学习资料（HTML 格式）
+│   ├── agent.html               # Agent（智能体）
+│   ├── llm-context.html         # 大模型的上下文
+│   └── skill.html               # Skill（智能体技能）
+├── concept-relationship.md      # 三者关系解析（Mermaid 流程图 + 文字）
+├── concept-learning-material.zip # Skill 分发包
+└── .workbuddy/
+    └── skills/
+        └── concept-learning-skill/   # 项目级 Skill 存放处
+            └── SKILL.md              # Skill 定义文件
+```
+
+## Skill 存放路径
+
+| 位置 | 路径 | 说明 |
+|------|------|------|
+| 项目级（本仓库） | `.workbuddy/skills/concept-learning-skill/SKILL.md` | 随仓库分发，团队内共享 |
+| 用户级（本机） | `C:\Users\l\.workbuddy\skills\concept-learning-material\SKILL.md` | 全局可用，所有项目生效 |
+| 分发包 | `concept-learning-material.zip` | 可导入其他环境使用 |
+
+> 注意：`concept-learning-skill` 目录名与 Skill 内部 `name` 字段（`concept-learning-material`）暂不一致，规范化处理待定。
+
+## 调用方法
+
+### 方式一：自然语言触发（推荐）
+
+在 WorkBuddy 对话中直接说出包含概念学习意图的话，技能会自动加载并执行：
+
+```
+帮我学习「XX概念」
+什么是 XX？给我一份学习资料
+用 concept-learning-skill 给我生成「XX」的学习资料
+```
+
+### 方式二：显式指定
+
+```
+调用 concept-learning-skill，主题是「XX概念」，输出 HTML 格式，保存到 learning-materials/
+```
+
+### 可选参数
+
+| 参数 | 缺省值 | 说明 |
+|------|--------|------|
+| 概念名称 | **必填** | 任意新概念，唯一必填项 |
+| 用户背景 | 技术背景的初学者 | 影响比喻和解释深度 |
+| 深度 | 入门科普级 | 可选：入门 / 进阶 / 专家 |
+| 语言 | 简体中文 | — |
+| 输出格式 | HTML | — |
+
+### Skill 执行流程
+
+技能加载后将严格按四步执行：
+
+1. **拆解概念**：识别领域、消解歧义（同名多义概念会先确认）；
+2. **强制检索**：联网检索权威来源（≥3 条独立来源，含 ≥1 条一手来源，不可跳过）；
+3. **综合生成**：按五段式结构输出学习资料；
+4. **自检**：核对 7 项清单（完整性、通用性、有据可依、通俗性、辨析有效、链接可达、篇幅合规）。
+
+## ⚠️ 人工核查说明
+
+**本仓库中的所有学习资料均经过人工核查。**
+
+- 三份概念学习资料（`learning-materials/*.html`）与概念关系解析（`concept-relationship.md`）中的事实性内容，均已由仓库所有者**逐条人工核对**，与 Skill 流程中检索到的权威来源比对确认；
+- 来源链接部分经过逐一验证，确保真实可达、贡献说明与内容相符；
+- 尽管生成流程已包含"强制检索 + 7 项自检"，仍以人工核查作为发布前的最后一道关口。**引用本仓库内容前，建议读者访问来源链接做二次确认。**
+
+## 后续维护
+
+- 新增概念学习资料：直接对话触发 Skill，产出保存至 `learning-materials/`；
+- 迭代 Skill 本身：修改 `SKILL.md` 后重新打包，并同步更新项目级与用户级两份副本；
+- 相关阅读：每个概念的详细来源清单见对应 HTML 文件的"来源链接"章节。
