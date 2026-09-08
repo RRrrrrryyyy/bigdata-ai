@@ -3,146 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>大模型的上下文 学习资料</title>
+<title>大模型的上下文（Context）学习资料</title>
 <style>
-  :root{
-    --accent:#0d9488; --accent-bg:#f0fdfa; --border:#e2e8f0; --text:#1e293b;
-    --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --ok:#059669; --warn:#b45309;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px;}
-  .wrap{max-width:860px;margin:0 auto;}
-  header{background:linear-gradient(135deg,#0d9488,#115e59);color:#fff;border-radius:14px;padding:36px 32px;margin-bottom:24px;}
-  header .tag{display:inline-block;background:rgba(255,255,255,.18);padding:2px 12px;border-radius:999px;font-size:13px;margin-bottom:12px;}
-  header h1{font-size:30px;margin-bottom:8px;}
-  header .sub{font-size:14px;opacity:.85;}
-  section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:20px;}
-  section h2{font-size:20px;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent-bg);display:flex;align-items:center;gap:10px;}
-  section h2 .num{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;}
-  h3{font-size:16px;margin:16px 0 8px;color:var(--text);}
-  p{margin-bottom:10px;}
-  ul,ol{padding-left:22px;margin-bottom:10px;}
-  li{margin-bottom:6px;}
-  .oneliner{background:var(--accent-bg);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-weight:600;}
-  .term{background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:8px;}
-  .term b{color:var(--accent);}
-  .case{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
-  .case b{color:var(--accent);}
-  .case.na{border-color:#fcd34d;background:#fffbeb;}
-  .case.na b{color:var(--warn);}
-  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;}
-  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top;}
-  th{background:var(--accent-bg);color:var(--text);}
-  tr:nth-child(even) td{background:#fafbfd;}
-  .src{display:flex;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;}
-  .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
-  .src a{color:var(--accent);word-break:break-all;}
-  .src .note{color:var(--muted);font-size:13px;}
-  details{margin-top:6px;} summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;}
-  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; background: #f4f6fa; color: #1f2937; line-height: 1.75; padding: 32px 16px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  header { background: linear-gradient(135deg, #0f766e, #14b8a6); color: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+  header h1 { font-size: 26px; margin-bottom: 6px; }
+  header p { opacity: .9; font-size: 14px; }
+  section { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+  h2 { font-size: 19px; color: #0f766e; border-left: 4px solid #14b8a6; padding-left: 10px; margin-bottom: 14px; }
+  h3 { font-size: 16px; color: #111827; margin: 14px 0 6px; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #e5e7eb; padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: #f0fdfa; color: #0f766e; }
+  .one-liner { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 12px 16px; border-radius: 6px; font-weight: 600; color: #134e4a; margin-top: 14px; }
+  .case { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+  .case b { color: #0f766e; }
+  .anti { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 12px 16px; }
+  details { margin: 6px 0 14px 0; }
+  summary { cursor: pointer; color: #0d9488; font-size: 14px; }
+  details p { background: #f8fafc; border-radius: 6px; padding: 10px 14px; margin-top: 6px; font-size: 14px; }
+  .src { font-size: 14px; margin-bottom: 10px; }
+  .src a { color: #0d9488; word-break: break-all; }
+  footer { text-align: center; color: #9ca3af; font-size: 12px; padding: 16px 0 8px; }
 </style>
 </head>
 <body>
-<div class="wrap">
-
+<div class="container">
 <header>
-  <span class="tag">人工智能 / 大语言模型</span>
-  <h1>大模型的上下文（Context / Context Window）学习资料</h1>
-  <div class="sub">生成日期：2026-09-07 ｜ 生成方式：基于 5 条独立检索来源综合编写</div>
+  <h1>大模型的上下文（Context）学习资料</h1>
+  <p>领域：人工智能 / 大模型应用 &nbsp;|&nbsp; 深度：入门到中级</p>
 </header>
 
 <section>
-  <h2><span class="num">1</span>学习目标</h2>
-  <p>读完本资料，你应当能够：</p>
-  <ul>
-    <li><b>解释</b> 上下文窗口是什么、为什么"输入和输出共享同一上限"；</li>
-    <li><b>描述</b> 窗口受限的四个技术原因（token 计量、位置编码、平方级算力、注意力稀释）；</li>
-    <li><b>区分</b> 上下文窗口、上下文长度、RAG、上下文学习（ICL）四个易混概念；</li>
-    <li><b>判断</b> "记不住"类痛点该靠扩窗口还是外部记忆方案解决。</li>
-  </ul>
+<h2>1. 学习目标</h2>
+<ul>
+  <li>能说出"上下文"与"上下文窗口"的含义，并用比喻向外行解释（对应第 3 节）。</li>
+  <li>能解释上下文由哪些信息构成、为什么它是模型唯一的"短期记忆"（对应第 4 节）。</li>
+  <li>能区分上下文、提示词与上下文工程三者的关系（对应第 6 节）。</li>
+  <li>能判断"塞更多资料进上下文"在什么时候反而有害，并说出替代做法（对应第 5 节）。</li>
+</ul>
 </section>
 
 <section>
-  <h2><span class="num">2</span>核心问题</h2>
-  <p>带着以下问题阅读，读完应在"自测问题"中检验自己能否回答：</p>
-  <ol>
-    <li>为什么 AI 会"聊完就忘"、第二天不认识你？</li>
-    <li>窗口已经大到 128K 甚至百万 token，为什么"记忆问题"依然存在？</li>
-    <li>RAG 和不断变大的上下文窗口，是互相替代的关系吗？</li>
-  </ol>
+<h2>2. 核心问题</h2>
+<ol>
+  <li>模型没有长期记忆，却能在长对话里"记得"你说过的话——它是怎么做到的？代价是什么？</li>
+  <li>为什么同一个模型、同一句提示词，换一批"喂进去的资料"后输出质量会天差地别？</li>
+  <li>上下文窗口已经到 128K 甚至更大，为什么工程师还在研究"压缩"和"取舍"而不是全塞进去？</li>
+</ol>
 </section>
 
 <section>
-  <h2><span class="num">3</span>个人解释</h2>
-  <p>把大模型想象成一位<b>在一块固定大小黑板上工作的解题者</b>。你写的问题、它写的回答、你们之前所有的聊天记录，全都写在这同一块黑板上。黑板容量是固定的（比如 8000 个词元）——一旦写满，为了写下新内容，最早写在左上角的字就会被擦掉。这块黑板，就是大模型的"上下文窗口"。</p>
-  <p>这个比喻揭示了三个关键事实：其一，<b>输入和输出共享同一块黑板</b>，你的提问和它的回答加起来不能超过上限；其二，黑板以外的内容模型<b>完全看不见</b>，这就是为什么 AI 常"聊完就忘"、第二天不认识你；其三，黑板上的字是<b>一次性的</b>——对话结束，黑板擦净，下次从零开始。理解了这块黑板，你就理解了大模型几乎所有"记忆问题"的根源。</p>
-  <div class="oneliner">如果只能记住一句话：上下文窗口是大模型单次推理能"看见"的全部内容（输入+输出之和）的 token 容量上限——它既是模型的短期记忆，也是模型的记忆极限。</div>
+<h2>3. 个人解释</h2>
+<p>想象你请了一位<strong>临时工</strong>来家里干活。这位临时工有个怪癖：<strong>他没有任何长期记忆</strong>，只能看到眼前工作台（白板）上摆着的东西。你把扫把、拖把、"哪些东西不能扔"的清单、上次的工作笔记都摆上白板，他立刻干得又快又好；你什么都没摆，只甩一句"把客厅收拾了"，他就只能瞎干。大模型就是这位临时工，而<strong>上下文（Context）就是那块白板上的全部内容</strong>——系统指令、聊天历史、检索来的资料、工具返回的结果、你当前的问题，全都摆在这块板上。</p>
+<p>这块白板有两个要害：一是<strong>容量有限</strong>（叫"上下文窗口"，以 token 计），写满了就得擦掉旧内容；二是<strong>板上的东西直接决定他的表现</strong>——同一个模型，板上放着退款政策原文，它就能答得精准；板上空空如也，它就只能靠训练时的印象"猜"，于是开始胡说（幻觉）。所以业内才说：模型每次回答时，它的"整个世界"就是当前的上下文窗口——不在窗口里的东西，对它而言不存在。</p>
+<div class="one-liner">如果只能记住一句话：上下文就是模型每次回答时唯一能"看见"的全部信息，它是模型的短期记忆，决定了模型答得好不好。</div>
 </section>
 
 <section>
-  <h2><span class="num">4</span>核心机制</h2>
-  <h3>起源</h3>
-  <p>上下文窗口源于 2017 年 Transformer 架构的自注意力（Self-Attention）机制：模型生成每个新词元时，都要"回看"前面所有词元。窗口大小随模型迭代爆炸式增长——从 GPT-3.5 时代的 4K token，到 GPT-4o / Llama 3.1 的 128K，再到 Gemini 1.5 Pro 的 200 万 token（可一次读完一整本书或一个代码库）。</p>
-  <h3>原理：为什么窗口有限</h3>
-  <ol>
-    <li><b>Token 计量</b>：模型按 token（词元）而非"字"计数。中文约 1 个 token ≈ 1.5-2 个汉字，英文约 1 个 token ≈ 0.75 个单词；标点、空格、表情符号也各占 token。</li>
-    <li><b>位置编码的边界</b>：Transformer 通过位置编码（如 RoPE、ALiBi）为每个 token 标记位置，其设计范围直接限定最大序列长度。</li>
-    <li><b>平方级计算代价</b>：自注意力复杂度为 O(n²)——窗口长度翻 10 倍，算力需求涨 100 倍；KV Cache 显存占用也与序列总长成正比，超限会溢出。</li>
-    <li><b>注意力稀释</b>：窗口越大，注意力越被摊薄，长文本中段的关键信息可能被"淹没"（所谓"大海捞针"难题），因此"能装下"不等于"用得好"。</li>
-  </ol>
-  <h3>关键术语</h3>
-  <div class="term"><b>Token（词元）</b>：大模型独立读取的最小语义单元，是上下文的计量单位。</div>
-  <div class="term"><b>上下文窗口 vs 上下文长度</b>：前者是实际推理时考虑的输入序列长度，后者是架构能力理论上限；窗口 ≤ 长度。</div>
-  <div class="term"><b>上下文截断</b>：超出窗口时服务端丢弃最早消息的策略——多轮对话因此"突破"窗口限制，但以牺牲记忆为代价。</div>
-  <div class="term"><b>长上下文（Long Context）</b>：百万级 token 窗口的能力，依赖 FlashAttention、RoPE 外推等工程技术。</div>
-  <div class="term"><b>上下文工程（Context Engineering）</b>：主动构建、管理进入窗口的全部信息的工程实践，被视为提示工程的升级范式。</div>
+<h2>4. 核心机制</h2>
+<h3>起源</h3>
+<p>"上下文"伴随 Transformer 架构自回归生成而天然存在——模型只能基于当前输入序列预测下一个 token。随着 LLM 应用走向复杂，2024–2025 年业界（IBM、Anthropic 生态等）把"系统设计喂给模型的全部信息"从提示词工程中独立出来，形成"上下文工程（Context Engineering）"这一学科，被视为提示词工程的自然演进。</p>
+<h3>原理：上下文的构成与约束</h3>
+<ul>
+  <li><strong>构成</strong>：系统提示（身份与规则）、用户当前查询、检索到的外部文档（RAG）、对话历史、工具返回结果、记忆条目——它们共同拼成模型一次推理看到的全部输入。</li>
+  <li><strong>有限预算</strong>：上下文窗口以 token 计（如 128K、200K），输入输出都算在内；窗口即"短期记忆"，模型没有真正的长期记忆。</li>
+  <li><strong>质量衰减</strong>：窗口越大不等于越好——资料过多会稀释注意力，出现"中间遗忘（lost in the middle）"、上下文中毒、上下文分心等失败模式。</li>
+  <li><strong>管理手段</strong>：检索筛选（只放最相关的）、压缩与摘要、排序（重要信息靠前）、工具与记忆集成——这些正是上下文工程的核心步骤。</li>
+</ul>
+<h3>关键要素（必掌握术语）</h3>
+<ul>
+  <li><strong>Context Window（上下文窗口）</strong>：模型单次推理能"一眼看全"的最大 token 量。</li>
+  <li><strong>Token</strong>：模型处理文本的最小单位（可理解为被切碎的词块），是窗口的计量单位。</li>
+  <li><strong>System Prompt（系统提示）</strong>：定义模型身份与规则的指令，位于上下文的最高优先级位置。</li>
+  <li><strong>RAG（检索增强生成）</strong>：从外部库检索资料放进上下文的技术，是上下文的重要来源。</li>
+  <li><strong>Context Engineering（上下文工程）</strong>：系统设计、筛选、组织上下文以最大化输出质量的工程实践。</li>
+</ul>
 </section>
 
 <section>
-  <h2><span class="num">5</span>应用场景</h2>
-  <div class="case"><b>长文档理解（办公/法律/研究）</b>：把整份财报、合同或论文放入窗口，让模型跨章节总结、比对、抽取要点——128K+ 窗口使其成为可能。</div>
-  <div class="case"><b>多轮对话（所有对话产品）</b>：对话历史完整进入上下文，模型据此理解"你刚才说的那个方案"指什么，保证连贯性；超出后由服务端截断最早消息。</div>
-  <div class="case"><b>代码库级编程（软件研发）</b>：Cursor 等编程工具利用 20 万 token 级窗口（如 2026 年 3 月推出的 Composer2 模型），让模型同时"看到"多个文件完成跨文件重构。</div>
-  <div class="case"><b>Agent 的短期记忆（智能体系统）</b>：Agent 每一步的工具调用与返回结果都累积在上下文窗口中，窗口就是它的"工作记忆"。</div>
-  <div class="case na"><b>不适用场景：海量知识的永久存储</b>。把整个知识库塞进窗口不可行：成本随长度线性甚至平方增长，且对话结束即丢失。需要跨会话记住大量信息时，应使用 RAG（外部向量数据库检索）而非硬撑窗口。</div>
+<h2>5. 应用场景</h2>
+<div class="case"><b>企业知识库问答（RAG 系统）</b>：把退款政策、产品文档检索后放入上下文，模型从"靠印象猜"变成"照原文答"，幻觉显著减少——IBM 指出此类系统的性能往往更多取决于上下文质量而非模型大小。</div>
+<div class="case"><b>智能体（Agent）的记忆管理</b>：Agent 每步调工具都会产生新上下文，工程上必须决定哪些保留、哪些摘要压缩、哪些存入外部记忆，否则几步之后窗口就被工具输出挤爆。</div>
+<div class="case"><b>长对话与长文档处理</b>：多轮聊天会持续吃掉窗口额度，通过滚动摘要、选择性保留历史，让模型在有限窗口里始终"记得"关键信息。</div>
+<div class="anti"><b>不适用场景</b>：认为"窗口够大，把所有资料一股脑塞进去就行"。研究表明塞满噪声的长上下文会让模型抓不住重点（中间遗忘），还会推高成本与延迟——正确做法是精选与压缩，而非堆料。</div>
 </section>
 
 <section>
-  <h2><span class="num">6</span>边界辨析</h2>
-  <table>
-    <tr><th>维度</th><th>上下文窗口</th><th>RAG（外部记忆）</th><th>上下文学习（ICL）</th></tr>
-    <tr><td><b>定义</b></td><td>模型单次推理可见内容的 token 容量上限</td><td>把知识存进外部数据库，用时检索并注入窗口</td><td>不更新权重、仅凭窗口内示例就学会新任务的能力</td></tr>
-    <tr><td><b>侧重点</b></td><td>容量（硬件/架构约束）</td><td>知识的存储与检索（工程方案）</td><td>模型的临时学习能力（模型特性）</td></tr>
-    <tr><td><b>典型用法</b></td><td>对话历史 + 长文档直接放入 prompt</td><td>企业知识库问答：先检索、后生成</td><td>prompt 里放几个"输入→输出"示例让模型模仿</td></tr>
-    <tr><td><b>一句话区分</b></td><td>窗口是"黑板的大小"</td><td>RAG 是"随用随取的资料柜"，弥补黑板装不下的问题</td><td>ICL 是"看例题就会做题"，发生在黑板之上</td></tr>
-  </table>
-  <p style="color:var(--muted);font-size:14px;">另一组易混概念：上下文窗口（实际考虑的输入长度）与上下文长度（架构理论上限）是"用水量"与"水桶容量"的关系。随着窗口进入百万级，行业重心正从"窗口内塞什么"（提示工程）转向"如何系统化管理全部上下文来源"（上下文工程）。</p>
+<h2>6. 边界辨析</h2>
+<table>
+  <tr><th>维度</th><th>提示词（Prompt）</th><th>上下文（Context）</th><th>上下文工程（Context Engineering）</th></tr>
+  <tr><td>定义</td><td>你写给模型的那句指令/问题</td><td>模型推理时能看到的全部信息总和</td><td>系统设计与管理上下文的一整套工程实践</td></tr>
+  <tr><td>侧重点</td><td>"怎么问"</td><td>"模型此刻知道什么"</td><td>"在什么信息背景下问"</td></tr>
+  <tr><td>典型用法</td><td>写清要求、给示例、让模型分步思考</td><td>系统提示+历史+检索资料+工具结果</td><td>检索筛选、压缩、排序、记忆集成</td></tr>
+  <tr><td><b>一句话区分</b></td><td>问对问题</td><td>备齐材料</td><td>把"备材料"做成流水线</td></tr>
+</table>
 </section>
 
 <section>
-  <h2><span class="num">7</span>自测问题</h2>
-  <div class="case"><b>1.（判断）</b>上下文窗口越大，模型对窗口内所有信息的理解效果就一定越好。
-    <details><summary>参考答案</summary><b>错误。</b>窗口越大注意力越被摊薄，长文本中段的关键信息可能被"淹没"（"大海捞针"难题）；"能装下"不等于"用得好"。</details></div>
-  <div class="case"><b>2.（填空）</b>按本资料的换算，1 个 token 大约对应 ____ 个汉字。
-    <details><summary>参考答案</summary>约 1.5-2 个汉字（因此估算中文文档占用时，可用"字数 ÷ 1.75"粗略折算 token 数）。</details></div>
-  <div class="case"><b>3.（判断）</b>你的提问和模型的回答加起来不能超过窗口上限，即输入与输出共享同一块"黑板"。
-    <details><summary>参考答案</summary><b>正确。</b>这正是多轮长对话先"忘事"的原因：新内容不断挤占空间，最早的记录被截断丢弃。</details></div>
-  <div class="case"><b>4.（简答）</b>要让 AI 跨会话记住用户的偏好和知识库，该靠继续扩大窗口，还是别的方案？
-    <details><summary>参考答案</summary>应使用<b>外部记忆方案（如 RAG：向量数据库 + 检索注入）</b>。把知识库常驻窗口既昂贵又会在对话结束后丢失；RAG 按需检索、跨会话持久，与窗口能力互补而非互斥。</details></div>
-  <div class="case"><b>5.（辨析）</b>"上下文窗口"和"上下文长度"是什么关系？
-    <details><summary>参考答案</summary>前者是<b>实际推理时考虑的输入序列长度</b>，后者是<b>架构能力的理论上限</b>——"用水量"与"水桶容量"的关系，窗口 ≤ 长度。</details></div>
+<h2>7. 自测问题</h2>
+<p><b>（判断）</b>1. 上下文窗口越大，模型回答质量一定越好。</p>
+<details><summary>参考答案</summary><p>错。过多信息会稀释注意力，出现"中间遗忘"等失败模式；精选、压缩后的短上下文常比塞满噪声的长上下文效果更好、成本更低。</p></details>
+<p><b>（选择）</b>2. 下列哪一项通常不属于一次推理时的上下文？A. 系统提示 B. 检索到的文档 C. 模型的训练权重 D. 对话历史</p>
+<details><summary>参考答案</summary><p>C。训练权重是模型的"长期能力"，不在推理时的上下文里；上下文只包含系统提示、查询、历史、检索资料、工具结果等输入信息。</p></details>
+<p><b>（选择）</b>3. "提示词工程是'问什么'，上下文工程是'在什么信息背景下问'"——这个对比说明上下文工程是提示词工程的：A. 替代品 B. 子集 C. 扩展与演进 D. 无关领域</p>
+<details><summary>参考答案</summary><p>C。IBM 等来源把上下文工程视为提示词工程的自然演进：提示词工程只管指令措辞，上下文工程管理整个信息载荷。</p></details>
+<p><b>（简答）</b>4. 用"临时工与白板"的比喻向外行解释上下文和上下文窗口。</p>
+<details><summary>参考答案</summary><p>模型像没有长期记忆的临时工，只能看到白板（上下文窗口）上摆的东西；板上摆好工具和说明他就干得好，板容量有限，写满就得擦掉旧内容。</p></details>
+<p><b>（简答）</b>5. 列举上下文通常包含的至少四类信息。</p>
+<details><summary>参考答案</summary><p>系统提示、用户当前查询、对话历史、检索到的外部文档、工具返回结果、记忆条目（任答四类即可）。</p></details>
 </section>
 
 <section>
-  <h2><span class="num">8</span>来源链接</h2>
-  <div class="src"><span class="n">1</span><div><a href="https://baike.baidu.com/item/上下文窗口/67367067">上下文窗口（百度百科）</a><div class="note">贡献了上下文窗口的规范定义、"黑板/草稿纸"比喻、与"上下文长度"的区分，以及从 GPT-3.5 4K 到 Gemini 1.5 Pro 2M 的发展历程数据。</div></div></div>
-  <div class="src"><span class="n">2</span><div><a href="https://www.81.cn/szb_223187/gfbszbxq/index.html?articleid=980232&paperDate=2026-06-09&paperNumber=04">Token：衡量算力的尺度（中国军网，2026-06-09）</a><div class="note">贡献了 token 的精确定义（中英文 token 换算比例）与"黑板写满擦旧字"的通俗解释。</div></div></div>
-  <div class="src"><span class="n">3</span><div><a href="https://news.qq.com/rain/a/20250831A03Q7K00">AI 大模型被「失忆」束缚的枷锁（腾讯新闻）</a><div class="note">贡献了上下文内记忆（短期、一次性）与外部记忆（RAG、跨会话）的对比框架。</div></div></div>
-  <div class="src"><span class="n">4</span><div><a href="https://www.sohu.com/a/1001842251_122500756">上下文工程的新范式、新挑战和新机遇（搜狐科技）</a><div class="note">贡献了"大海捞针"测试、注意力稀释、长上下文对 RAG 范式的冲击，以及上下文"流"化趋势的分析。</div></div></div>
-  <div class="src"><span class="n">5</span><div><a href="https://www.sohu.com/a/996963121_468661">大模型上下文工程指南 2026（中科算网）</a><div class="note">贡献了狭义上下文（Token Window）到广义上下文（五类系统状态）的范式跃迁与技术演进四阶段。</div></div></div>
+<h2>8. 来源链接</h2>
+<div class="src">1. <a href="https://www.ibm.com/think/topics/context-engineering">IBM — What Is Context Engineering?</a>：权威机构定义，提供上下文的构成清单、上下文工程六大步骤及"窗口即短期记忆"的论述。</div>
+<div class="src">2. <a href="https://weaviate.io/blog/context-engineering">Weaviate — Context Engineering: LLM Memory and Retrieval for AI Agents</a>：提供白板类比、上下文中毒/分心/混淆/冲突四种失败模式与 Agent 记忆架构分析。</div>
+<div class="src">3. <a href="https://docs.lm-kit.com/lm-kit-net/guides/glossary/context-engineering.html">LM-Kit Docs — What is Context Engineering?</a>：提供上下文窗口结构图解、提示词工程 vs 上下文工程对比表及"中间遗忘"研究引用。</div>
 </section>
 
-<footer>本资料由 concept-learning-material 技能生成 ｜ 事实性内容均可追溯至上述来源</footer>
+<footer>由 concept-learning-skill 生成 · 内容基于上述公开来源综合，引用前建议访问来源二次确认</footer>
 </div>
 </body>
 </html>

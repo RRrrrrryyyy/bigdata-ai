@@ -3,148 +3,130 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Skill 学习资料</title>
+<title>Skill（智能体技能）学习资料</title>
 <style>
-  :root{
-    --accent:#9333ea; --accent-bg:#faf5ff; --border:#e2e8f0; --text:#1e293b;
-    --muted:#64748b; --bg:#f8fafc; --card:#ffffff; --ok:#059669; --warn:#b45309;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.8;padding:24px;}
-  .wrap{max-width:860px;margin:0 auto;}
-  header{background:linear-gradient(135deg,#9333ea,#6b21a8);color:#fff;border-radius:14px;padding:36px 32px;margin-bottom:24px;}
-  header .tag{display:inline-block;background:rgba(255,255,255,.18);padding:2px 12px;border-radius:999px;font-size:13px;margin-bottom:12px;}
-  header h1{font-size:30px;margin-bottom:8px;}
-  header .sub{font-size:14px;opacity:.85;}
-  section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px 28px;margin-bottom:20px;}
-  section h2{font-size:20px;color:var(--accent);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent-bg);display:flex;align-items:center;gap:10px;}
-  section h2 .num{background:var(--accent);color:#fff;width:28px;height:28px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;}
-  h3{font-size:16px;margin:16px 0 8px;color:var(--text);}
-  p{margin-bottom:10px;}
-  ul,ol{padding-left:22px;margin-bottom:10px;}
-  li{margin-bottom:6px;}
-  code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-size:13px;}
-  .oneliner{background:var(--accent-bg);border-left:4px solid var(--accent);padding:12px 16px;border-radius:0 8px 8px 0;margin-top:12px;font-weight:600;}
-  .term{background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:8px;}
-  .term b{color:var(--accent);}
-  .case{border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:10px;}
-  .case b{color:var(--accent);}
-  .case.na{border-color:#fcd34d;background:#fffbeb;}
-  .case.na b{color:var(--warn);}
-  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;}
-  th,td{border:1px solid var(--border);padding:9px 12px;text-align:left;vertical-align:top;}
-  th{background:var(--accent-bg);color:var(--text);}
-  tr:nth-child(even) td{background:#fafbfd;}
-  .src{display:flex;gap:10px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;}
-  .src .n{background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;margin-top:3px;}
-  .src a{color:var(--accent);word-break:break-all;}
-  .src .note{color:var(--muted);font-size:13px;}
-  details{margin-top:6px;} summary{cursor:pointer;color:var(--accent);font-size:13px;font-weight:600;}
-  footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 0 30px;}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; background: #f4f6fa; color: #1f2937; line-height: 1.75; padding: 32px 16px; }
+  .container { max-width: 860px; margin: 0 auto; }
+  header { background: linear-gradient(135deg, #7c2d12, #ea580c); color: #fff; border-radius: 14px; padding: 28px 32px; margin-bottom: 24px; }
+  header h1 { font-size: 26px; margin-bottom: 6px; }
+  header p { opacity: .9; font-size: 14px; }
+  section { background: #fff; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(15,23,42,.06); }
+  h2 { font-size: 19px; color: #9a3412; border-left: 4px solid #ea580c; padding-left: 10px; margin-bottom: 14px; }
+  h3 { font-size: 16px; color: #111827; margin: 14px 0 6px; }
+  ul, ol { padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid #e5e7eb; padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: #fff7ed; color: #9a3412; }
+  .one-liner { background: #fff7ed; border-left: 4px solid #ea580c; padding: 12px 16px; border-radius: 6px; font-weight: 600; color: #7c2d12; margin-top: 14px; }
+  .case { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+  .case b { color: #9a3412; }
+  .anti { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 12px 16px; }
+  code { background: #f1f5f9; border-radius: 4px; padding: 1px 6px; font-size: 13px; color: #be123c; }
+  details { margin: 6px 0 14px 0; }
+  summary { cursor: pointer; color: #ea580c; font-size: 14px; }
+  details p { background: #f8fafc; border-radius: 6px; padding: 10px 14px; margin-top: 6px; font-size: 14px; }
+  .src { font-size: 14px; margin-bottom: 10px; }
+  .src a { color: #ea580c; word-break: break-all; }
+  footer { text-align: center; color: #9ca3af; font-size: 12px; padding: 16px 0 8px; }
 </style>
 </head>
 <body>
-<div class="wrap">
-
+<div class="container">
 <header>
-  <span class="tag">人工智能 / 智能体扩展机制</span>
   <h1>Skill（智能体技能）学习资料</h1>
-  <div class="sub">生成日期：2026-09-07 ｜ 生成方式：基于 5 条独立检索来源综合编写</div>
+  <p>领域：人工智能 / 智能体工程 &nbsp;|&nbsp; 深度：入门到中级</p>
 </header>
 
 <section>
-  <h2><span class="num">1</span>学习目标</h2>
-  <p>读完本资料，你应当能够：</p>
-  <ul>
-    <li><b>说出</b> Skill 解决的核心问题——通用 Agent 缺领域专长；</li>
-    <li><b>描述</b> 三级渐进式披露机制，以及它为什么能省上下文；</li>
-    <li><b>区分</b> Skill、Tool/MCP、Prompt、微调四种能力扩展方式；</li>
-    <li><b>判断</b> 什么时候应该把反复粘贴的提示词沉淀为 Skill。</li>
-  </ul>
+<h2>1. 学习目标</h2>
+<ul>
+  <li>能说出 Skill 的定义与基本形态（含 SKILL.md），并用比喻向外行解释（对应第 3 节）。</li>
+  <li>能解释"渐进式披露"三级加载机制如何让 Skill 既强大又不撑爆上下文（对应第 4 节）。</li>
+  <li>能区分 Skill 与提示词、工具/MCP、微调，并说出各自适用场景（对应第 6 节）。</li>
+  <li>能判断一个需求该不该做成 Skill，并说出判断依据（对应第 5 节）。</li>
+</ul>
 </section>
 
 <section>
-  <h2><span class="num">2</span>核心问题</h2>
-  <p>带着以下问题阅读，读完应在"自测问题"中检验自己能否回答：</p>
-  <ol>
-    <li>把规范直接写进系统提示词，和做成 Skill，差别在哪里？</li>
-    <li>装了几百个 Skill，为什么不会撑爆模型的上下文窗口？</li>
-    <li>Skill 和 MCP 工具是什么关系——它们是竞争还是互补？</li>
-  </ol>
+<h2>2. 核心问题</h2>
+<ol>
+  <li>提示词也能教模型做事，为什么还需要把知识打包成"Skill"这种文件结构？</li>
+  <li>装了几百个 Skill 的智能体，为什么上下文窗口不会被 Skill 的内容塞满？</li>
+  <li>Skill 为什么强调"可以包含可执行脚本"，而不是全部用自然语言写说明？</li>
+</ol>
 </section>
 
 <section>
-  <h2><span class="num">3</span>个人解释</h2>
-  <p>想象一位新入职的天才员工：智商极高、学习能力极强，但对你们公司的规矩一无所知——不知道周报用什么格式、PPT 要套什么模板、报销走什么流程。传统解法是每次干活前<b>口头叮嘱一遍</b>（这就像每次对话都粘贴一大段 prompt）；而 Skill 的做法是给这位天才发一本<b>《新员工入职手册》</b>：把"这类事在我们这儿怎么做"写成一册册文档，放在书架上。</p>
-  <p>关键在于<strong>手册不是一直摊在桌上的</strong>：每本手册的封面（技能名称和简介）始终可见，但正文只在任务匹配时才被翻开。这位天才看到"帮我做季度汇报 PPT"，才去抽出《品牌 PPT 规范》这本手册照着做；做代码审查时才翻《代码评审清单》。一本手册写一次、全团队复用，既沉淀了组织经验，又不占用桌面空间（也就是不浪费模型的上下文窗口）。</p>
-  <div class="oneliner">如果只能记住一句话：Skill 是打包了"某个领域该怎么做"的文件夹（以 SKILL.md 为核心），让通用 AI 助手在需要时自动加载，从通才变成专才——工具决定 AI"能做什么"，Skill 决定"怎么做"。</div>
+<h2>3. 个人解释</h2>
+<p>想象你公司来了一位<strong>极其聪明但完全不懂行的新人</strong>。他学习能力强、什么都能干，但不知道你们公司的报销流程、不懂你们的设计规范、没听过你们的内部工具。你有两个选择：每次派活都站在他旁边口述一遍要求（这就是"提示词"）；或者，给他一套<strong>入职培训手册</strong>——每个主题一本小册子，封面写着书名和一句话简介，他遇到对应任务时自己抽出来翻看，看完就知道该怎么办。</p>
+<p>Skill 就是这套<strong>给智能体的"入职手册"</strong>。Anthropic 在 2025 年推出 Agent Skills 时用的正是这个比喻：Skill 是一个文件夹，里面装着说明书（<code>SKILL.md</code>）、参考材料和可执行脚本，把"怎么做某类事"的程序性知识打包好；通用智能体装上它，就立刻变成某个领域的专家。妙处在于"按需翻阅"：手册不摊开时只占书架上的一格（约 100 token 的元数据），只有任务相关时才被打开读进上下文。</p>
+<div class="one-liner">如果只能记住一句话：Skill 就是把"怎么做某类事"的知识打包成一个含 SKILL.md 的文件夹，让通用智能体按需加载、即插即用地变成专家。</div>
 </section>
 
 <section>
-  <h2><span class="num">4</span>核心机制</h2>
-  <h3>起源</h3>
-  <p>2025 年 10 月，Anthropic 发布 Agent Skills；同年 12 月 18 日将其发布为<b>跨平台可移植的开放标准</b>。它回答的是 Agent 落地的核心缺口：通用 Agent 有智能、有工具，但<b>没有领域专长</b>——就像会解所有数学题的天才，未必比做过上千份报税单的老会计报得好税。Anthropic 的博客直言：他们因此"停止构建一个个专用 Agent，转而构建 Skill"。</p>
-  <h3>原理：一个文件夹 + 三级渐进式披露</h3>
-  <p>每个 Skill 是一个文件夹，核心是 <code>SKILL.md</code> 文件：YAML 元数据（name + description）声明"我是谁、何时用我"，正文是操作指南，可另附脚本（scripts/）、参考文档（references/）、模板资产（assets/）。它按需分三级加载：</p>
-  <ol>
-    <li><b>第 1 级 · 元数据（常驻）</b>：仅 name 与 description 进入系统提示，约 50-100 token。因此装几百个 Skill 也不撑爆上下文。</li>
-    <li><b>第 2 级 · 指令（触发时加载）</b>：用户请求与 description 匹配时，模型才读取 SKILL.md 正文（应控制在 5k token 内）。</li>
-    <li><b>第 3 级 · 资源（按需加载）</b>：脚本通过执行而非读入来使用（只有运行结果进入上下文），参考文档只在被引用时读取。</li>
-  </ol>
-  <h3>关键术语</h3>
-  <div class="term"><b>SKILL.md</b>：每个 Skill 的必备核心文件，YAML 前言 + Markdown 指令正文。</div>
-  <div class="term"><b>Frontmatter（元数据前言）</b>：description 是触发匹配的依据，必须同时写清"做什么"和"何时用"。</div>
-  <div class="term"><b>渐进式披露（Progressive Disclosure）</b>：元数据常驻、正文按需、资源更需的三级加载机制，是 Skill 不浪费上下文的关键设计。</div>
-  <div class="term"><b>触发（Trigger）</b>：模型将用户请求与各 Skill 的 description 匹配、自动决定加载哪个 Skill 的过程；也可用 <code>/skill-name</code> 手动调用。</div>
-  <div class="term"><b>skill-creator</b>：官方提供的"用 Skill 造 Skill"的元技能，引导用户交互式生成完整的 Skill 目录。</div>
+<h2>4. 核心机制</h2>
+<h3>起源</h3>
+<p>2025 年 10 月 16 日 Anthropic 正式发布 Agent Skills，用于解决"通用智能体缺乏领域程序性知识"的问题；2025 年 12 月 18 日，Anthropic 将 Agent Skills 作为开放标准发布，实现跨平台可移植。其设计动机是：随着智能体能力增强，需要可组合、可扩展、可移植的方式来注入领域专长，而不是为每个场景定制一个碎片化的新智能体。</p>
+<h3>原理：渐进式披露（Progressive Disclosure）三级加载</h3>
+<ul>
+  <li><strong>第一级：元数据（常驻）</strong>——<code>SKILL.md</code> 开头的 YAML frontmatter（name + description），启动时即载入系统提示，每个 Skill 仅约 100 token，让智能体"知道有这些技能、何时该用"。</li>
+  <li><strong>第二级：指令正文（触发时加载）</strong>——当任务与 description 匹配，智能体通过 bash 读取 <code>SKILL.md</code> 全文（通常 5k token 以内），工作流程、最佳实践此时才进入上下文。</li>
+  <li><strong>第三级：资源与代码（按需加载）</strong>——Skill 目录里可捆绑参考文档（REFERENCE.md 等）与可执行脚本（.py 等），只在被引用时才读取或运行；脚本执行不占用上下文，理论上容量无上限。</li>
+</ul>
+<p>这一设计让"装几百个 Skill"与"上下文不被撑爆"可以兼得，也是 Skill 区别于"把说明全写进系统提示"的关键。</p>
+<h3>关键要素（必掌握术语）</h3>
+<ul>
+  <li><strong>SKILL.md</strong>：Skill 的核心文件，必须以含 name 和 description 的 YAML frontmatter 开头。</li>
+  <li><strong>Progressive Disclosure（渐进式披露）</strong>：按"元数据→正文→资源"三级按需加载的核心设计原则。</li>
+  <li><strong>Composable（可组合）</strong>：多个 Skill 可叠加，智能体自动识别并协调使用。</li>
+  <li><strong>Portable（可移植）</strong>：同一格式跨产品使用（Claude 应用、Claude Code、API），一次构建多处运行。</li>
+</ul>
 </section>
 
 <section>
-  <h2><span class="num">5</span>应用场景</h2>
-  <div class="case"><b>办公文档生成（日常办公）</b>：Anthropic 预置了 PowerPoint、Excel、Word、PDF 等文档技能，内含专业排版与最佳实践，用户说"做个含公式的报表"即自动触发对应 Skill。</div>
-  <div class="case"><b>组织流程标准化（企业协作）</b>：把公司的周报格式、品牌规范、发布流程写成 Skill，上传一次、全员复用——Claude Academy 的示例中，所有 PM 产出的状态报告自动遵循同一结构与语气，无需任何人复制粘贴模板。</div>
-  <div class="case"><b>沉淀重复性工作流（个人效率）</b>：Claude Code 官方建议——"当你反复把同一段指令/清单/多步流程粘贴进对话时，就该做成 Skill 了"。例如 git 变更总结、代码评审清单、项目启动配方（recipe）的自动记录与复用。</div>
-  <div class="case"><b>合作伙伴生态（SaaS 集成）</b>：Notion、Browserbase 等公司以 Partner Skill 的形式把自己的服务能力打包给 Agent 使用，形成"基础技能 + 伙伴技能 + 自建技能"的生态。</div>
-  <div class="case na"><b>不适用场景：一次性简单指令与外部数据连接</b>。只需一句话说清的事，直接写 prompt 即可，做成 Skill 反而增加维护负担；需要让 AI"连接和操作外部系统"（查数据库、发邮件）时，那是工具/MCP 的职责，Skill 解决的是"怎么做"而非"能做什么"。</div>
+<h2>5. 应用场景</h2>
+<div class="case"><b>文档处理（Anthropic 预构建技能）</b>：官方提供的 pptx、xlsx、docx、pdf 技能让 Claude 能真正创建和编辑电子表格、演示文稿与可填写的 PDF 表单——例如 PDF 技能通过附带脚本实现表单填充，这是纯对话难以做到的。</div>
+<div class="case"><b>团队工作流沉淀（Claude Code / 企业）</b>：团队把代码审查规范、发布流程写成自定义 Skill，通过版本控制共享，智能体在相关任务中自动遵循——"创建一次，自动生效"，不用每次对话重复叮嘱。</div>
+<div class="case"><b>品牌与合规（企业知识注入）</b>：把品牌视觉规范、法务合规模板打包成 Skill，让智能体生成的文档、邮件自动符合组织标准，把组织知识从"老员工脑子里"变成可复用资产。</div>
+<div class="anti"><b>不适用场景</b>：一次性的临时任务。提示词是对话级指令，说完就完；Skill 的价值在"跨对话复用"。如果某件事只做一次，写清楚一段提示词就够了，打包成 Skill 是过度工程。</div>
 </section>
 
 <section>
-  <h2><span class="num">6</span>边界辨析</h2>
-  <table>
-    <tr><th>维度</th><th>Skill（技能）</th><th>Tool / MCP（工具）</th><th>Prompt / System Prompt（提示词）</th></tr>
-    <tr><td><b>定义</b></td><td>打包"某类任务该怎么做"的指令文件夹，按需自动加载</td><td>连接数据与动作的接口（查代码、发邮件），由外部程序执行</td><td>写在对话里的即时指令，随对话结束而消失</td></tr>
-    <tr><td><b>回答的问题</b></td><td>"怎么做"（How）——流程、规范、最佳实践</td><td>"能做什么"（What）——能力与数据通道</td><td>"这次做什么"——单次任务的要求</td></tr>
-    <tr><td><b>复用性</b></td><td>创建一次，跨对话/跨产品自动复用</td><td>一次集成，随处调用</td><td>每次对话都要重新粘贴</td></tr>
-    <tr><td><b>加载方式</b></td><td>三级渐进式披露，触发才加载正文</td><td>定义进工具列表，随调用执行</td><td>始终占据当前上下文</td></tr>
-    <tr><td><b>一句话区分</b></td><td>Skill 是入职手册，教方法</td><td>Tool 是工具箱，给能力</td><td>Prompt 是口头交代，说完即止</td></tr>
-  </table>
-  <p style="color:var(--muted);font-size:14px;">另可对比微调（Fine-tuning）：微调把知识"焊进"模型权重，成本高、更新慢；Skill 把知识放在文件系统里，用 Git 版本管理、随时可改，还能捆绑可执行脚本完成"生成 token 不可靠"的确定性操作——"代码即接口"正是 Skill 范式的核心理念。</p>
+<h2>6. 边界辨析</h2>
+<table>
+  <tr><th>维度</th><th>提示词（Prompt）</th><th>工具 / MCP</th><th>Skill</th></tr>
+  <tr><td>定义</td><td>对话中的一次性文字指令</td><td>模型可调用的外部函数/接口（如经 MCP 协议接入）</td><td>含指令+资源+脚本的文件夹，按需加载的领域知识包</td></tr>
+  <tr><td>侧重点</td><td>"这次怎么做"</td><td>"能做什么"（能力接口）</td><td>"这类事怎么做"（程序性知识）</td></tr>
+  <tr><td>典型用法</td><td>临时交代要求、调整输出风格</td><td>查数据库、调 API、执行动作</td><td>沉淀工作流、规范、最佳实践并跨对话复用</td></tr>
+  <tr><td><b>一句话区分</b></td><td>口头交代一次</td><td>给一双手</td><td>给一本可反复翻阅的操作手册</td></tr>
+</table>
 </section>
 
 <section>
-  <h2><span class="num">7</span>自测问题</h2>
-  <div class="case"><b>1.（判断）</b>Skill 是一种轻量级的模型微调。
-    <details><summary>参考答案</summary><b>错误。</b>Skill 不改变模型权重，只是按需加载的指令文件；微调把知识"焊进"权重，成本高、更新慢。</details></div>
-  <div class="case"><b>2.（填空）</b>SKILL.md 的元数据中，决定"何时触发本技能"的字段是 ____。
-    <details><summary>参考答案</summary><b>description</b>。模型把用户请求与各技能的 description 匹配来决定加载哪个 Skill，因此它必须同时写清"做什么"和"何时用"。</details></div>
-  <div class="case"><b>3.（简答）</b>三级渐进式披露中，哪一级常驻上下文？大约占用多少 token？
-    <details><summary>参考答案</summary><b>第 1 级（元数据）</b>，仅 name 与 description 进入系统提示，约 50-100 token——所以装几百个 Skill 也不会挤占窗口。</details></div>
-  <div class="case"><b>4.（选择）</b>你发现自己每次对话都要粘贴同一段"周报格式要求"。按照官方建议，正确的做法是：A. 换更大的模型　B. 把它做成 Skill　C. 每次手动粘贴　D. 微调模型
-    <details><summary>参考答案</summary><b>B。</b>Claude Code 官方文档："当你反复把同一段指令/清单/多步流程粘贴进对话时，就该做成 Skill 了。"</details></div>
-  <div class="case"><b>5.（辨析）</b>Skill 回答"怎么做"（How），那么 Tool/MCP 回答的是____？
-    <details><summary>参考答案</summary><b>"能做什么"（What）</b>——Tool 提供能力与数据通道，Skill 提供使用这些能力的流程、规范与最佳实践，两者互补。</details></div>
+<h2>7. 自测问题</h2>
+<p><b>（判断）</b>1. 一个 Skill 的内容在智能体启动时会全部读入上下文窗口。</p>
+<details><summary>参考答案</summary><p>错。启动时只加载 YAML 元数据（约 100 token）；SKILL.md 正文在任务匹配时才读入，捆绑的资源与脚本按需加载——这就是渐进式披露。</p></details>
+<p><b>（选择）</b>2. SKILL.md 的 YAML frontmatter 必须包含哪两个字段？A. name + version B. name + description C. description + author D. name + tags</p>
+<details><summary>参考答案</summary><p>B。name 和 description 是必填元数据，它们是渐进式披露的第一级，决定智能体"何时该用这个技能"。</p></details>
+<p><b>（选择）</b>3. 团队希望"代码审查规范在所有对话中自动生效，不用每次重申"，最合适的做法是：A. 每次对话写长提示词 B. 打包成 Skill C. 微调模型 D. 换一个更大的模型</p>
+<details><summary>参考答案</summary><p>B。Skill 的价值正是"创建一次、跨对话自动复用"；提示词无法跨对话，微调成本高且不适合频繁更新的流程性知识。</p></details>
+<p><b>（简答）</b>4. 用"入职手册"的比喻解释 Skill 及其渐进式披露。</p>
+<details><summary>参考答案</summary><p>Skill 像给聪明新人的一套入职手册：书脊上的书名和简介（元数据）让他知道有这本手册，遇到对应任务才抽出来读正文（SKILL.md），需要细节时再翻附录（捆绑资源），平时不摊开不占桌面（上下文）。</p></details>
+<p><b>（简答）</b>5. Skill 为什么允许捆绑可执行脚本，而不是全部用自然语言写说明？</p>
+<details><summary>参考答案</summary><p>某些操作（如排序、填表单）用传统代码执行远比模型逐 token 生成可靠且便宜；脚本通过 bash 运行，结果确定且不占用上下文，是对模型能力的工程补位。</p></details>
 </section>
 
 <section>
-  <h2><span class="num">8</span>来源链接</h2>
-  <div class="src"><span class="n">1</span><div><a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Agent Skills 官方文档（Anthropic / Claude Platform）</a><div class="note">一手来源。贡献了 Skill 的官方定义、三级渐进式披露架构、YAML frontmatter 规范与 scripts/references 资源组织方式。</div></div></div>
-  <div class="src"><span class="n">2</span><div><a href="https://www.anthropic.com/news/skills">Introducing Agent Skills（Anthropic 官方公告）</a><div class="note">一手来源。贡献了发布时间线（2025-10 推出、2025-12-18 成为开放标准）、可组合/可移植/高效三大特性。</div></div></div>
-  <div class="src"><span class="n">3</span><div><a href="http://claude.com/blog/building-agents-with-skills-equipping-agents-for-specialized-work">Building agents with Skills（Anthropic 工程博客）</a><div class="note">贡献了"从构建专用 Agent 转向构建 Skill"的范式转变叙事、天才与老会计类比、三级 token 成本数据与技能生态三分法。</div></div></div>
-  <div class="src"><span class="n">4</span><div><a href="https://academy.claude.com/courses/claude-platform-101/skills">Skills 课程（Claude Academy）</a><div class="note">贡献了 Skill vs Tool 的经典区分（tools = what，skills = how）与"周报生成器"端到端示例。</div></div></div>
-  <div class="src"><span class="n">5</span><div><a href="https://code.claude.com/docs/en/skills">Extend Claude with skills（Claude Code 官方文档）</a><div class="note">贡献了"何时该创建 Skill"的判断标准（反复粘贴同样指令时）、与 CLAUDE.md 的区别及 /skill 调用机制。</div></div></div>
+<h2>8. 来源链接</h2>
+<div class="src">1. <a href="https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills">Anthropic 工程博客 — Equipping agents for the real world with Agent Skills</a>：一手来源，提供 Skill 定义、"入职指南"比喻、渐进式披露三级架构与 PDF 技能实例。</div>
+<div class="src">2. <a href="https://www.anthropic.com/news/skills">Anthropic 官方新闻 — Introducing Agent Skills</a>：一手来源，提供发布时间线（2025-10-16 发布、2025-12-18 成为开放标准）与四大特性（可组合/可移植/高效/强大）。</div>
+<div class="src">3. <a href="https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview">Claude 官方文档 — Agent Skills 概述</a>：一手来源，提供三级加载的 token 成本细节、目录结构示例及 Skill 与提示词的区别。</div>
+<div class="src">4. <a href="https://console.anthropic.com/docs/zh-CN/agents-and-tools/agent-skills/overview">Anthropic 中文文档 — Agent Skills</a>：一手来源（中文），印证"可复用的、基于文件系统的资源"这一定位与按需加载机制。</div>
 </section>
 
-<footer>本资料由 concept-learning-material 技能生成 ｜ 事实性内容均可追溯至上述来源</footer>
+<footer>由 concept-learning-skill 生成 · 内容基于上述公开来源综合，引用前建议访问来源二次确认</footer>
 </div>
 </body>
 </html>

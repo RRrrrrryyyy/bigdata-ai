@@ -1,143 +1,132 @@
 # ============================================================
-# .gitignore — bigdata-ai 仓库
-# 重点：排除 API Key、密码、令牌等敏感信息
+# 敏感信息（最高优先级：API Key / 密码 / 证书 / 凭据）
 # ============================================================
-
-# ---------- 敏感信息 / 密钥文件（最高优先级） ----------
-# 环境变量文件（最常被误提交的泄密源头）
+# 环境变量与密钥配置
 .env
 .env.*
+*.env
 !.env.example
+!.env.sample
 
-# 各类密钥与证书
-*.pem
+# 密钥与证书文件
 *.key
+*.pem
 *.p12
 *.pfx
+*.keystore
+*.jks
 *.crt
 *.cer
-*.jks
+*.der
 id_rsa*
 id_ed25519*
-id_ecdsa*
-*.ssh
-known_hosts
+*.ppk
 
-# 通用密钥/凭据命名（显式文件名兜底）
-secrets.*
-credentials.*
-secret_key*
+# 凭据/令牌命名的文件（兜底，含各类命名习惯）
+*credential*
+*credentials*
+*secret*
+*secrets*
+*.secret
+*token*.json
+*apikey*
+*api_key*
+*api-key*
 service-account*.json
-firebase-adminsdk*.json
+gcp-key*.json
+auth.json
+.netrc
+.npmrc
+.pypirc
 
-# API 配置文件（可能内嵌 Key）
-config/local.*
-**/config/production.*
-apikey*.txt
-token*.txt
+# 密码文件
+*.passwd
+*.password
+passwords.txt
+shadow
 
-# 密码管理器与数据库转储
-*.kdbx
-*.kdbx.*
-*.sql
-*.dump
-*.bak
+# 云平台/工具凭据目录
+.aws/
+.azure/
+.gcloud/
+.ssh/
+.kube/config
+.docker/config.json
 
-# ---------- 会话 / 日志（可能含运行时泄露的凭据） ----------
+# ============================================================
+# 日志与运行时产物（可能夹带令牌、请求内容）
+# ============================================================
 *.log
 logs/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.pnpm-debug.log*
-session*
-*.session
+*.sqlite
+*.db-journal
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
 
-# ---------- 系统与编辑器 ----------
-# Windows
+# ============================================================
+# 操作系统文件
+# ============================================================
+.DS_Store
+.AppleDouble
+.LSOverride
 Thumbs.db
 ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
-*.lnk
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon?
-._*
-# Linux
-*~
-.fuse_hidden*
-.directory
-.Trash-*
-# 编辑器 / IDE
+
+# ============================================================
+# 编辑器与 IDE
+# ============================================================
 .vscode/
 !.vscode/settings.json
+!.vscode/extensions.json
 .idea/
-*.swp
-*.swo
-*.swn
-*.sublime-project
-*.sublime-workspace
+*.iml
+.project
+.classpath
+.settings/
 
-# ---------- Python ----------
+# ============================================================
+# Python
+# ============================================================
 __pycache__/
 *.py[cod]
 *$py.class
-*.egg-info/
-.eggs/
-build/
-dist/
 .venv/
 venv/
 env/
-.python-version
+.Python
+pip-log.txt
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-.coverage
-htmlcov/
-instance/
-.webassets-cache
 
-# ---------- Node.js ----------
+# ============================================================
+# Node.js
+# ============================================================
 node_modules/
-.npm/
-.yarn/cache
-.yarn/unplugged
-.yarn/build-state.yml
-.yarn/install-state.gz
-.pnp.*
-package-lock.json.bak
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-# ---------- 其他常见技术栈 ----------
-# Java
-*.class
-*.jar
-hs_err_pid*
-# Docker（env 文件常含密码）
-docker-compose.override.yml
-.docker/
-# Terraform（state 文件含明文凭据）
-*.tfstate
-*.tfstate.*
-.terraform/
-*.tfvars
-!*.tfvars.example
-crash.log
-
-# ---------- 项目私有目录 ----------
-# WorkBuddy 个人记忆日志（含个人工作记录，不随仓库分发）
-# 注意：.workbuddy/skills/ 保留在仓库中（技能定义需团队共享）
-.workbuddy/memory/
-.workbuddy/plugins/
-.workbuddy/cache/
-
-# 临时文件
-*.tmp
-*.temp
-*.swp
+# ============================================================
+# 构建与缓存产物
+# ============================================================
+dist/
+build/
+out/
 .cache/
-tmp/
+.parcel-cache/
+.next/
+.nuxt/
+coverage/
+
+# ============================================================
+# 工作区私有数据
+# ============================================================
+# 个人记忆日志不随仓库分发；skills 保留（属项目资产）
+.workbuddy/memory/
